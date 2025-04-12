@@ -1,20 +1,21 @@
-name: Deploy to DEV
+name: Deploy to PROD
 
 on:
   push:
     branches:
-      - develop  # Trigger only on develop branch
+      - main  # Only run when code is pushed/merged to 'main'
 
 jobs:
   deploy:
-    name: Deploy to Develop Environment
+    name: Deploy to Production
     runs-on: ubuntu-latest
+
     environment:
-      name: develop  # ✅ This must match your intended environment name
+      name: production  # You can change the environment name if needed
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Print message
-        run: echo "🚀 Code pushed to 'develop' branch — Deploying to DEV environment"
+      - name: Print deploy message
+        run: echo "🚀 Code pushed to main branch — will deploy to PRODUCTION environment"

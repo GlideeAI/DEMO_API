@@ -1,0 +1,20 @@
+name: Deploy to DEV
+
+on:
+  push:
+    branches:
+      - develop  # Trigger only on develop branch
+
+jobs:
+  deploy:
+    name: Deploy to Develop Environment
+    runs-on: ubuntu-latest
+    environment:
+      name: develop  # ✅ This must match your intended environment name
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Print message
+        run: echo "🚀 Code pushed to 'develop' branch — Deploying to DEV environment"

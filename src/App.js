@@ -19,7 +19,7 @@ function App() {
 
     try {
       const response = await fetch(
-        `https://yy2wucs35j.execute-api.us-west-1.amazonaws.com/dev/hello?name=${name}`
+        `https://jtxlt2n1m9.execute-api.ap-south-1.amazonaws.com/Prod/users/${name}`
       );
       
       const data = await response.json();
@@ -65,6 +65,8 @@ function App() {
           <div className="user-card">
             <h2>User Details</h2>
             <p>{userData.message}</p>
+            {userData.company && <p><strong>Company:</strong> {userData.company}</p>}
+            {userData.project && <p><strong>Project:</strong> {userData.project}</p>}
           </div>
         )}
       </header>

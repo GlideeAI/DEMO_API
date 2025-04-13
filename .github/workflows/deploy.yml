@@ -3,7 +3,7 @@ name: Deploy to Production Only
 on:
   push:
     branches:
-      - main  # 🚨 Only triggers when code is pushed to 'main'
+      - main
 
 jobs:
   deploy:
@@ -11,14 +11,14 @@ jobs:
     runs-on: ubuntu-latest
 
     environment:
-      name: production  # Only 'production' environment will be used
+      name: production  # this will deploy only to production environment
 
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
 
       - name: Simulate Deployment
-        run: echo "🚀 Code pushed to 'main' — deploying to PRODUCTION environment"
+        run: echo "🚀 Code pushed to MAIN — deploying to PRODUCTION environment"
 
       - name: Complete Deployment
-        run: echo "✅ Deployment finished for PRODUCTION"
+        run: echo "✅ Deployment finished successfully"

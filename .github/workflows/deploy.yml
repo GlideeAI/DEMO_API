@@ -3,13 +3,13 @@ name: Deploy Based on Branch
 on:
   push:
     branches:
-      - dev
-      - staging
       - main
+      - staging
+      - dev
 
 jobs:
   deploy:
-    name: Deploy
+    name: Deploy Job
     runs-on: ubuntu-latest
 
     environment:
@@ -20,10 +20,10 @@ jobs:
       }}
 
     steps:
-      - name: Checkout code
+      - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Simulate deployment
+      - name: Simulate Deployment
         run: |
           echo "🔁 Branch: ${{ github.ref_name }}"
           if [ "${{ github.ref_name }}" == "main" ]; then
@@ -34,5 +34,5 @@ jobs:
             echo "🛠️ Deploying to DEV environment"
           fi
 
-      - name: Final step
-        run: echo "✅ Deployment completed"
+      - name: Complete Deployment
+        run: echo "✅ Deployment finished"

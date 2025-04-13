@@ -1,24 +1,38 @@
-name: Deploy to PROD
+name: Deploy Based on Branch
 
 on:
   push:
     branches:
+      - dev
+      - staging
       - main
 
 jobs:
   deploy:
-    name: Deploy to Production
+    name: Deploy
     runs-on: ubuntu-latest
 
     environment:
-      name: production  # This triggers GitHub to create the Environment
+      name: ${{ 
+        github.ref_name == 'main' && 'production' || 
+        github.ref_name == 'staging' && 'staging' || 
+        'dev' 
+      }}
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Simulate deployment
-        run: echo "🚀 Code pushed to main — deploying to PRODUCTION environment"
+        run: |
+          echo "🔁 Branch: ${{ github.ref_name }}"
+          if [ "${{ github.ref_name }}" == "main" ]; then
+            echo "🚀 Deploying to PRODUCTION environment"
+          elif [ "${{ github.ref_name }}" == "staging" ]; then
+            echo "🧪 Deploying to STAGING environment"
+          else
+            echo "🛠️ Deploying to DEV environment"
+          fi
 
-      - name: Complete deployment
-        run: echo "✅ Deployment finished"
+      - name: Final step
+        run: echo "✅ Deployment completed"

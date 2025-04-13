@@ -19,11 +19,11 @@ function App() {
 
     try {
       const response = await fetch(
-        `https://jtxlt2nlm9.execute-api.ap-south-1.amazonaws.com/Prod/users/${name.toLowerCase()}`
+        `https://jtxlt2n1m9.execute-api.ap-south-1.amazonaws.com/Prod/users/${name}`
       );
-    
+      
       const data = await response.json();
-    
+
       if (response.ok) {
         setUserData(data);
       } else {

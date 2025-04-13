@@ -13,26 +13,14 @@ jobs:
     runs-on: ubuntu-latest
 
     environment:
-      name: ${{ 
-        github.ref_name == 'main' && 'production' || 
-        github.ref_name == 'staging' && 'staging' || 
-        'dev' 
-      }}
+      name: ${{ github.ref_name }}  # Automatically picks 'main', 'staging', or 'dev'
 
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
 
       - name: Simulate Deployment
-        run: |
-          echo "🔁 Branch: ${{ github.ref_name }}"
-          if [ "${{ github.ref_name }}" == "main" ]; then
-            echo "🚀 Deploying to PRODUCTION environment"
-          elif [ "${{ github.ref_name }}" == "staging" ]; then
-            echo "🧪 Deploying to STAGING environment"
-          else
-            echo "🛠️ Deploying to DEV environment"
-          fi
+        run: echo "🚀 Code pushed to '${{ github.ref_name }}' — deploying to '${{ github.ref_name }}' environment"
 
       - name: Complete Deployment
-        run: echo "✅ Deployment finished"
+        run: echo "✅ Deployment to '${{ github.ref_name }}' finished"
